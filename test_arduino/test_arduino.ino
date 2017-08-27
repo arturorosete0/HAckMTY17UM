@@ -1,11 +1,11 @@
-#include <BMI160.h>
-#include <CurieIMU.h>
-
 /*Prueba de las funciones del arduino 101
  * Double tap detector
  * Arturo Rosete, Montemorelos University
  * arturorosete0@gmail.com
 */
+
+#include <BMI160.h>
+#include <CurieIMU.h>
 
 boolean blinkState = false;          // state of the LED
 
@@ -17,8 +17,8 @@ void setup() {
   CurieIMU.attachInterrupt(eventCallback);
 
   /* Enable Shock Detection */
-  CurieIMU.setDetectionThreshold(CURIE_IMU_SHOCK, 1500); // 1.5g = 1500 mg
-  CurieIMU.setDetectionDuration(CURIE_IMU_SHOCK, 50);   // 50ms
+  CurieIMU.setDetectionThreshold(CURIE_IMU_SHOCK, 16000); // 1.5g = 1500 mg
+  CurieIMU.setDetectionDuration(CURIE_IMU_SHOCK, 75);   // 50ms
   CurieIMU.interrupts(CURIE_IMU_SHOCK);
 
   Serial.println("IMU initialisation complete, waiting for events...");
@@ -28,9 +28,8 @@ void loop() {
   // blink the LED in the main loop:
   digitalWrite(13, blinkState);
   blinkState = !blinkState;
-  delay(500);
+  delay(200);
 }
-
 
 static void eventCallback(void)
 {
